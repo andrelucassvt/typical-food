@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:typical_food/app/util/strings_app.dart';
+import 'package:typical_food/app/util/strings/strings_app.dart';
 
 class BottomNavBarStatesWidget extends StatefulWidget {
   const BottomNavBarStatesWidget({

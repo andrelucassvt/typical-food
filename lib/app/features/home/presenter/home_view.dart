@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:typical_food/app/features/home/coordinator/home_coordinator.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
-import 'package:typical_food/app/util/estados_strings.dart';
+import 'package:typical_food/app/util/strings/estados_strings.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
