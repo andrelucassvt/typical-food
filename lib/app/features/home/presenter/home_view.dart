@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:typical_food/app/features/home/coordinator/home_coordinator.dart';
+import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
+import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
+import 'package:typical_food/app/util/strings/estados_strings.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -12,38 +11,19 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final int _selectedEstados = 0;
+  final _listEstados = EstadosStrings.estados;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //AppBar para Android
-        appBar: Platform.isAndroid
-            ? AppBar(
-                title: const Text('Typical Food'),
-                centerTitle: false,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      HomeCoordinator.navigateAboutView(context);
-                    },
-                    child: const Text('Sobre'),
-                  )
-                ],
-              )
-            : null,
+        bottomNavigationBar: BottomNavBarStatesWidget(
+          onTap: _alterarEstado,
+          titulo: _listEstados[_selectedEstados],
+        ),
         body: CustomScrollView(
           slivers: <Widget>[
-            //AppBar para IOS
-            if (Platform.isIOS)
-              CupertinoSliverNavigationBar(
-                largeTitle: const Text('Typical Food'),
-                trailing: TextButton(
-                  onPressed: () {
-                    HomeCoordinator.navigateAboutView(context);
-                  },
-                  child: const Text('Sobre'),
-                ),
-              ),
-            // Fim AppBar IOS
+            const AppBarAdaptive(),
             SliverFillRemaining(
               child: Column(
                 children: const [],
@@ -52,4 +32,6 @@ class _HomeViewState extends State<HomeView> {
           ],
         ));
   }
+
+  Future<void> _alterarEstado() async {}
 }
