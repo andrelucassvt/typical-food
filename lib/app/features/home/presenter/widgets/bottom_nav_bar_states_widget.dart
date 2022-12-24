@@ -1,8 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:typical_food/app/util/strings/strings_app.dart';
 
 class BottomNavBarStatesWidget extends StatefulWidget {
   const BottomNavBarStatesWidget({
@@ -58,36 +54,11 @@ class _BottomNavBarStatesWidgetState extends State<BottomNavBarStatesWidget> {
             ),
           ),
           IconButton(
-            onPressed: Platform.isIOS
-                ? _showMessageIconInfoIOS
-                : _showMessageIconInfoAndroid,
+            onPressed: () {},
             icon: const Icon(Icons.info_outline),
           ),
         ],
       ),
     );
-  }
-
-  _showMessageIconInfoIOS() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: const Text(StringsApp.atencao),
-        content: const Text(StringsApp.nemTodosOsEstados),
-        actions: <CupertinoDialogAction>[
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Ok'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _showMessageIconInfoAndroid() {
-    print('ANDROID');
   }
 }
