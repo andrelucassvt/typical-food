@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:typical_food/app/features/home/data/datasource/home_datasource.dart';
 import 'package:typical_food/app/common/error/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 import 'package:typical_food/app/features/home/domain/repository/ihome_repository.dart';
 
 class HomeRepository extends HomeRepositoryImpl {
@@ -12,8 +12,7 @@ class HomeRepository extends HomeRepositoryImpl {
   });
 
   @override
-  Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>>
-      getResumoPrato() async {
+  Future<Either<Failure, List<HomeEntity>>> getResumoPrato() async {
     try {
       final result = await dataSource.getResumoPrato();
 

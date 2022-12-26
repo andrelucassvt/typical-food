@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
 abstract class HomeDatasoucerImpl {
-  Future<QuerySnapshot<Map<String, dynamic>>> getResumoPrato();
+  Future<List<HomeEntity>> getResumoPrato();
 }
