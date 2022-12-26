@@ -12,6 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getPratos() async {
     final result = await getResumoUseCase();
+    emit(HomeLoading());
 
     emit(
       result.fold(
