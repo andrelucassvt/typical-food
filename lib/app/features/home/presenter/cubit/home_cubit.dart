@@ -6,7 +6,7 @@ import 'package:typical_food/app/features/home/domain/usecase/get_resumo_usecase
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.getResumoUseCase) : super(HomeInitial());
+  HomeCubit({required this.getResumoUseCase}) : super(HomeInitial());
 
   final GetResumoUseCase getResumoUseCase;
 
