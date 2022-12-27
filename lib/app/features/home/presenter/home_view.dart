@@ -4,10 +4,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:typical_food/app/common/global_widgets/circular_progress_widget.dart';
 import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/prato_widget.dart';
+import 'package:typical_food/app/util/colors_app.dart';
 import 'package:typical_food/app/util/strings/estados_strings.dart';
 
 class HomeView extends StatefulWidget {
@@ -43,6 +45,18 @@ class _HomeViewState extends State<HomeView> {
             child: BlocBuilder<HomeCubit, HomeState>(
               bloc: cubit,
               builder: (context, state) {
+                if (state is HomeLoading) {
+                  return CircularProgressWidget(
+                    color: ColorsApp.darkPrimary,
+                  );
+                }
+
+                if (state is HomeErro) {
+                  return Center(
+                    child: Text('${state.erro}'),
+                  );
+                }
+
                 if (state is HomeSucess) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +103,9 @@ class _HomeViewState extends State<HomeView> {
                   );
                 }
 
-                return Container();
+                return Container(
+                  color: Colors.red,
+                );
               },
             ),
           )

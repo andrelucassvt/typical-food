@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "860286329772",
+    "project_id": "typical-food-1e7b0",
+    "storage_bucket": "typical-food-1e7b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860286329772:android:93fca276b10373ceded009",
+        "android_client_info": {
+          "package_name": "com.andre.typical_food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860286329772-f85kv0nnvsh4ne5revi1600lac6nlmt1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOrXYzbtl6xRQpnCyYh5P2oOi576JPc5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860286329772-f85kv0nnvsh4ne5revi1600lac6nlmt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
