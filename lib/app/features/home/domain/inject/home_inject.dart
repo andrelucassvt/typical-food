@@ -9,7 +9,7 @@ import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 class HomeInjectDependency {
   static void init(GetIt getIt) {
     getIt.registerFactory<HomeDatasoucerImpl>(
-      () => HomeDataSource(),
+      () => HomeDataSource(db: getIt()),
     );
 
     getIt.registerFactory<HomeRepositoryImpl>(

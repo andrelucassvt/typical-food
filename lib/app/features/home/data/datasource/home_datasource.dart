@@ -5,10 +5,12 @@ import 'package:typical_food/app/features/home/domain/datasource/ihome_datasourc
 import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
 class HomeDataSource implements HomeDatasoucerImpl {
+  final FirebaseFirestore db;
+
+  HomeDataSource({required this.db});
+
   @override
   Future<List<HomeEntity>> getResumoPrato() async {
-    final db = FirebaseFirestore.instance;
-
     try {
       final data = await db.collection('comidas').get();
 
