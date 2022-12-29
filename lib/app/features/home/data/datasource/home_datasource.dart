@@ -4,7 +4,7 @@ import 'package:typical_food/app/features/home/data/model/home_model.dart';
 import 'package:typical_food/app/features/home/domain/datasource/ihome_datasource.dart';
 import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
-class HomeDataSource implements HomeDatasoucerImpl {
+class HomeDataSource implements HomeDataSourceImpl {
   @override
   Future<List<HomeEntity>> getResumoPrato() async {
     final db = FirebaseFirestore.instance;

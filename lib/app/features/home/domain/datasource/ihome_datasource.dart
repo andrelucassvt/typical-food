@@ -1,5 +1,5 @@
 import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
-abstract class HomeDatasoucerImpl {
+abstract class HomeDataSourceImpl {
   Future<List<HomeEntity>> getResumoPrato();
 }

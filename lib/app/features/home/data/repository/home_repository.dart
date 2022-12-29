@@ -1,11 +1,11 @@
-import 'package:typical_food/app/features/home/data/datasource/home_datasource.dart';
 import 'package:typical_food/app/common/error/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:typical_food/app/features/home/domain/datasource/ihome_datasource.dart';
 import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 import 'package:typical_food/app/features/home/domain/repository/ihome_repository.dart';
 
 class HomeRepository extends HomeRepositoryImpl {
-  final HomeDataSource dataSource;
+  final HomeDataSourceImpl dataSource;
 
   HomeRepository({
     required this.dataSource,
