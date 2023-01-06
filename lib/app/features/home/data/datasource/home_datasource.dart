@@ -10,13 +10,13 @@ class HomeDataSource implements HomeDataSourceImpl {
     final db = FirebaseFirestore.instance;
 
     try {
-      final data = await db.collection('comidas').get();
+      final data = await db.collection('Pará').get();
 
       final result = data.docs.map((doc) {
         final data = doc.data();
 
         return HomeModel(
-          id: data['id'],
+          id: doc.id,
           image: data['image'],
           name: data['name'],
           description: data['description'],
