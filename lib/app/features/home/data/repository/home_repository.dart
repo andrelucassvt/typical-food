@@ -12,9 +12,10 @@ class HomeRepository extends HomeRepositoryImpl {
   });
 
   @override
-  Future<Either<Failure, List<HomeEntity>>> getResumoPrato() async {
+  Future<Either<Failure, List<HomeEntity>>> getResumoPrato(
+      String nameCollerction) async {
     try {
-      final result = await dataSource.getResumoPrato();
+      final result = await dataSource.getResumoPrato(nameCollerction);
 
       return Right(result);
     } on Failure catch (e) {

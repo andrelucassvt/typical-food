@@ -6,11 +6,11 @@ import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
 class HomeDataSource implements HomeDataSourceImpl {
   @override
-  Future<List<HomeEntity>> getResumoPrato() async {
+  Future<List<HomeEntity>> getResumoPrato(String nameCollerction) async {
     final db = FirebaseFirestore.instance;
 
     try {
-      final data = await db.collection('Pará').get();
+      final data = await db.collection(nameCollerction).get();
 
       final result = data.docs.map((doc) {
         final data = doc.data();

@@ -20,15 +20,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final int _selectedEstados = 0;
-  final _listEstados = EstadosStrings.estados;
+  // final int _selectedEstados = 0;
   final cubit = GetIt.I.get<HomeCubit>();
 
   @override
   void initState() {
     super.initState();
 
-    cubit.getPratos();
+    // _alterarEstado();
+    cubit.getPratos('Pará');
   }
 
   @override
@@ -51,8 +51,8 @@ class _HomeViewState extends State<HomeView> {
           if (state is HomeSucess) {
             return Scaffold(
               bottomNavigationBar: BottomNavBarStatesWidget(
-                onTap: _alterarEstado,
-                titulo: _listEstados[_selectedEstados],
+                onTap: () {},
+                item: _alterarEstado(),
               ),
               body: CustomScrollView(
                 slivers: <Widget>[
@@ -85,9 +85,45 @@ class _HomeViewState extends State<HomeView> {
             );
           }
 
-          return Container();
+          return Container(
+            color: Colors.red,
+          );
         });
   }
 
-  Future<void> _alterarEstado() async {}
+  Widget _alterarEstado() {
+    String listEstados = EstadosStrings.estados.first;
+
+    return DropdownButton(
+      value: listEstados,
+      dropdownColor: Colors.blue,
+      borderRadius: BorderRadius.circular(10),
+      underline: Container(height: 0),
+      icon: const Icon(
+        Icons.keyboard_arrow_down_outlined,
+        color: Colors.white,
+      ),
+      items: EstadosStrings.estados
+          .map(
+            (estado) => DropdownMenuItem(
+              value: estado,
+              child: Text(
+                estado,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      onChanged: (String? value) {
+        setState(() {
+          listEstados = value!;
+          cubit.getPratos(value);
+        });
+      },
+    );
+  }
 }
