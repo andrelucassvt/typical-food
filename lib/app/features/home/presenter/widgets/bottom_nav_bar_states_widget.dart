@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 class BottomNavBarStatesWidget extends StatefulWidget {
   const BottomNavBarStatesWidget({
-    required this.onTap,
     required this.item,
     super.key,
   });
 
-  final VoidCallback onTap;
   final Widget item;
 
   @override

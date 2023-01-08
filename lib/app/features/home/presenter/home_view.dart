@@ -32,62 +32,58 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      bloc: cubit,
-      builder: (context, state) {
-        if (state is HomeLoading) {
-          return CircularProgressWidget(
-            color: ColorsApp.darkPrimary,
-          );
-        }
+    return Scaffold(
+      bottomNavigationBar: BottomNavBarStatesWidget(
+        item: _alterarEstado(),
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          const AppBarAdaptive(),
+          SliverFillRemaining(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BlocBuilder<HomeCubit, HomeState>(
+                    bloc: cubit,
+                    builder: (context, state) {
+                      if (state is HomeLoading) {
+                        return CircularProgressWidget(
+                          color: ColorsApp.darkPrimary,
+                        );
+                      }
 
-        if (state is HomeErro) {
-          return Center(
-            child: Text(state.erro.errorMessage),
-          );
-        }
+                      if (state is HomeErro) {
+                        return Center(
+                          child: Text(state.erro.errorMessage),
+                        );
+                      }
 
-        if (state is HomeSucess) {
-          return Scaffold(
-            bottomNavigationBar: BottomNavBarStatesWidget(
-              onTap: () {},
-              item: _alterarEstado(),
-            ),
-            body: CustomScrollView(
-              slivers: <Widget>[
-                const AppBarAdaptive(),
-                SliverFillRemaining(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CarouselSlider(
-                        options: CarouselOptions(
-                          aspectRatio: 1,
-                          viewportFraction: 0.7,
-                        ),
-                        items: state.pratos.map((prato) {
-                          return PratoWidget(
-                            url: prato.image,
-                            nome: prato.name,
-                            descricao: prato.description,
-                            onTap: () {
-                              log('Click');
-                            },
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                )
+                      if (state is HomeSucess) {
+                        return CarouselSlider(
+                          options: CarouselOptions(
+                            aspectRatio: 1,
+                            viewportFraction: 0.7,
+                          ),
+                          items: state.pratos.map((prato) {
+                            return PratoWidget(
+                              url: prato.image,
+                              nome: prato.name,
+                              descricao: prato.description,
+                              onTap: () {
+                                log('Click');
+                              },
+                            );
+                          }).toList(),
+                        );
+                      }
+
+                      return Container();
+                    }),
               ],
             ),
-          );
-        }
-
-        return Container(
-          color: Colors.red,
-        );
-      },
+          )
+        ],
+      ),
     );
   }
 
