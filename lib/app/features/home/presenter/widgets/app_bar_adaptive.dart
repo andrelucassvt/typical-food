@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:typical_food/app/features/home/coordinator/home_coordinator.dart';
-import 'package:typical_food/app/util/strings/strings_app.dart';
+import 'package:typical_food/app/common/strings/strings_app.dart';
 
 class AppBarAdaptive extends StatelessWidget {
   const AppBarAdaptive({super.key});

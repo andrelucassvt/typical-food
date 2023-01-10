@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:typical_food/app/util/colors_app.dart';
+import 'package:typical_food/app/common/strings/colors_app.dart';
 
 class PratoWidget extends StatelessWidget {
   PratoWidget({

@@ -16,7 +16,7 @@ class HomeDataSource implements HomeDataSourceImpl {
         final data = doc.data();
 
         return HomeModel(
-          id: doc.id,
+          id: data['data'],
           image: data['image'],
           name: data['name'],
           description: data['description'],

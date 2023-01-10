@@ -9,8 +9,8 @@ import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/prato_widget.dart';
-import 'package:typical_food/app/util/colors_app.dart';
-import 'package:typical_food/app/util/strings/estados_strings.dart';
+import 'package:typical_food/app/common/strings/colors_app.dart';
+import 'package:typical_food/app/common/strings/estados_strings.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
