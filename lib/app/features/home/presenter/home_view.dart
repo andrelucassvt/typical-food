@@ -21,7 +21,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final cubit = GetIt.I.get<HomeCubit>();
   List<String> _listEstados = [];
-  late String _estados = _listEstados.first;
+  late String _estado = _listEstados.first;
 
   @override
   void initState() {
@@ -108,7 +108,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _alterarEstado() {
     return DropdownButton(
-      value: _estados,
+      value: _estado,
       dropdownColor: Colors.blue,
       borderRadius: BorderRadius.circular(10),
       underline: Container(height: 0),
@@ -133,7 +133,7 @@ class _HomeViewState extends State<HomeView> {
           .toList(),
       onChanged: (String? value) {
         setState(() {
-          _estados = value!;
+          _estado = value!;
           cubit.getPratos(value);
         });
       },
