@@ -10,7 +10,6 @@ import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptiv
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/prato_widget.dart';
 import 'package:typical_food/app/common/strings/colors_app.dart';
-import 'package:typical_food/app/common/strings/estados_strings.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -21,21 +20,24 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final cubit = GetIt.I.get<HomeCubit>();
-  String _listEstados = EstadosStrings.estados.first;
+  List<String> _listEstados = [];
+  late String _estados = _listEstados.first;
 
   @override
   void initState() {
     super.initState();
 
-    cubit.getPratos('Pará');
+    cubit.getDados('Pará');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavBarStatesWidget(
-        item: _alterarEstado(),
-      ),
+      bottomNavigationBar: _listEstados.isEmpty
+          ? null
+          : BottomNavBarStatesWidget(
+              item: _alterarEstado(),
+            ),
       body: CustomScrollView(
         slivers: <Widget>[
           const AppBarAdaptive(),
@@ -43,42 +45,58 @@ class _HomeViewState extends State<HomeView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocBuilder<HomeCubit, HomeState>(
-                    bloc: cubit,
-                    builder: (context, state) {
-                      if (state is HomeLoading) {
-                        return CircularProgressWidget(
-                          color: ColorsApp.darkPrimary,
-                        );
-                      }
+                BlocConsumer<HomeCubit, HomeState>(
+                  bloc: cubit,
+                  listener: (context, state) {
+                    if (state is HomeListEstados) {
+                      _listEstados = state.estados;
 
-                      if (state is HomeErro) {
-                        return Center(
-                          child: Text(state.erro.errorMessage),
-                        );
-                      }
+                      return;
+                    }
 
-                      if (state is HomeSucess) {
-                        return CarouselSlider(
-                          options: CarouselOptions(
-                            aspectRatio: 1,
-                            viewportFraction: 0.7,
-                          ),
-                          items: state.pratos.map((prato) {
-                            return PratoWidget(
-                              url: prato.image,
-                              nome: prato.name,
-                              descricao: prato.description,
-                              onTap: () {
-                                log('Click');
-                              },
-                            );
-                          }).toList(),
-                        );
-                      }
+                    if (state is HomeSucess) {
+                      setState(() {
+                        _listEstados;
+                      });
 
-                      return Container();
-                    }),
+                      return;
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is HomeLoading) {
+                      return CircularProgressWidget(
+                        color: ColorsApp.darkPrimary,
+                      );
+                    }
+
+                    if (state is HomeErro) {
+                      return Center(
+                        child: Text(state.erro.errorMessage),
+                      );
+                    }
+
+                    if (state is HomeListPratos) {
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                          aspectRatio: 1,
+                          viewportFraction: 0.7,
+                        ),
+                        items: state.pratos.map((prato) {
+                          return PratoWidget(
+                            url: prato.image,
+                            nome: prato.name,
+                            descricao: prato.description,
+                            onTap: () {
+                              log('message');
+                            },
+                          );
+                        }).toList(),
+                      );
+                    }
+
+                    return Container();
+                  },
+                ),
               ],
             ),
           )
@@ -89,7 +107,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _alterarEstado() {
     return DropdownButton(
-      value: _listEstados,
+      value: _estados,
       dropdownColor: Colors.blue,
       borderRadius: BorderRadius.circular(10),
       underline: Container(height: 0),
@@ -97,9 +115,9 @@ class _HomeViewState extends State<HomeView> {
         Icons.keyboard_arrow_down_outlined,
         color: Colors.white,
       ),
-      items: EstadosStrings.estados
+      items: _listEstados
           .map(
-            (estado) => DropdownMenuItem(
+            (String estado) => DropdownMenuItem(
               value: estado,
               child: Text(
                 estado,
@@ -114,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
           .toList(),
       onChanged: (String? value) {
         setState(() {
-          _listEstados = value!;
+          _estados = value!;
           cubit.getPratos(value);
         });
       },

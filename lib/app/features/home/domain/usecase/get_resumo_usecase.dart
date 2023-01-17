@@ -10,7 +10,7 @@ class GetResumoUseCase {
 
   final HomeRepositoryImpl repository;
 
-  Future<Either<Failure, List<HomeEntity>>> call(String nameCollerction) async {
-    return await repository.getResumoPrato(nameCollerction);
+  Future<Either<Failure, List<HomeEntity>>> call(String nomeEstado) async {
+    return await repository.getResumoPrato(nomeEstado);
   }
 }

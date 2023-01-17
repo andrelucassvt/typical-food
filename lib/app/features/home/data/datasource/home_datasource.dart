@@ -5,12 +5,16 @@ import 'package:typical_food/app/features/home/domain/datasource/ihome_datasourc
 import 'package:typical_food/app/features/home/domain/entiy/home_entity.dart';
 
 class HomeDataSource implements HomeDataSourceImpl {
-  @override
-  Future<List<HomeEntity>> getResumoPrato(String nameCollerction) async {
-    final db = FirebaseFirestore.instance;
+  final db = FirebaseFirestore.instance;
 
+  @override
+  Future<List<HomeEntity>> getResumoPrato(String nomeEstado) async {
     try {
-      final data = await db.collection(nameCollerction).get();
+      final data = await db
+          .collection('Estados')
+          .doc(nomeEstado)
+          .collection('comidas')
+          .get();
 
       final result = data.docs.map((doc) {
         final data = doc.data();
@@ -20,6 +24,21 @@ class HomeDataSource implements HomeDataSourceImpl {
           name: data['name'],
           description: data['description'],
         );
+      }).toList();
+
+      return result;
+    } on FirebaseException catch (e) {
+      throw CommonDesconhecidoError(message: e.message);
+    }
+  }
+
+  @override
+  Future<List<String>> getEstados() async {
+    try {
+      final data = await db.collection('Estados').get();
+
+      final result = data.docs.map((doc) {
+        return doc.id;
       }).toList();
 
       return result;

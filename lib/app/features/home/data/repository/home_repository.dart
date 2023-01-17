@@ -13,9 +13,20 @@ class HomeRepository extends HomeRepositoryImpl {
 
   @override
   Future<Either<Failure, List<HomeEntity>>> getResumoPrato(
-      String nameCollerction) async {
+      String nomeEstado) async {
     try {
-      final result = await dataSource.getResumoPrato(nameCollerction);
+      final result = await dataSource.getResumoPrato(nomeEstado);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getEstados() async {
+    try {
+      final result = await dataSource.getEstados();
 
       return Right(result);
     } on Failure catch (e) {
