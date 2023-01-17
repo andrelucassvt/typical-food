@@ -76,21 +76,22 @@ class _HomeViewState extends State<HomeView> {
                     }
 
                     if (state is HomeListPratos) {
-                      return CarouselSlider(
+                      final prato = state.pratos;
+
+                      return CarouselSlider.builder(
+                        itemCount: state.pratos.length,
                         options: CarouselOptions(
                           aspectRatio: 1,
                           viewportFraction: 0.7,
                         ),
-                        items: state.pratos.map((prato) {
-                          return PratoWidget(
-                            url: prato.image,
-                            nome: prato.name,
-                            descricao: prato.description,
-                            onTap: () {
-                              log('message');
-                            },
-                          );
-                        }).toList(),
+                        itemBuilder: (context, index, _) => PratoWidget(
+                          url: prato[index].image,
+                          nome: prato[index].name,
+                          descricao: prato[index].description,
+                          onTap: () {
+                            log('tap !!');
+                          },
+                        ),
                       );
                     }
 
