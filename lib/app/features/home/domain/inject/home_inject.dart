@@ -3,6 +3,7 @@ import 'package:typical_food/app/features/home/data/datasource/home_datasource.d
 import 'package:typical_food/app/features/home/data/repository/home_repository.dart';
 import 'package:typical_food/app/features/home/domain/datasource/ihome_datasource.dart';
 import 'package:typical_food/app/features/home/domain/repository/ihome_repository.dart';
+import 'package:typical_food/app/features/home/domain/usecase/get_estados_usecase.dart';
 import 'package:typical_food/app/features/home/domain/usecase/get_resumo_usecase.dart';
 import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 
@@ -16,12 +17,19 @@ class HomeInjectDependency {
       () => HomeRepository(dataSource: getIt()),
     );
 
+    getIt.registerFactory<GetEstadosUseCase>(
+      () => GetEstadosUseCase(repository: getIt()),
+    );
+
     getIt.registerFactory<GetResumoUseCase>(
       () => GetResumoUseCase(repository: getIt()),
     );
 
     getIt.registerFactory<HomeCubit>(
-      () => HomeCubit(getResumoUseCase: getIt()),
+      () => HomeCubit(
+        getResumoUseCase: getIt(),
+        getEstadosUseCase: getIt(),
+      ),
     );
   }
 }

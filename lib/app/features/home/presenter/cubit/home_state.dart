@@ -6,11 +6,19 @@ class HomeInitial extends HomeState {}
 
 class HomeLoading extends HomeState {}
 
-class HomeSucess extends HomeState {
+class HomeListPratos extends HomeState {
   final List<HomeEntity> pratos;
 
-  HomeSucess(this.pratos);
+  HomeListPratos(this.pratos);
 }
+
+class HomeListEstados extends HomeState {
+  final List<String> estados;
+
+  HomeListEstados(this.estados);
+}
+
+class HomeSucess extends HomeState {}
 
 class HomeErro extends HomeState {
   final Failure erro;
