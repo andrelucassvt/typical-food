@@ -49,16 +49,14 @@ class _HomeViewState extends State<HomeView> {
                   bloc: cubit,
                   listener: (context, state) {
                     if (state is HomeListEstados) {
-                      _listEstados = state.estados;
+                      setState(() {
+                        _listEstados = state.estados;
+                      });
 
                       return;
                     }
 
                     if (state is HomeSucess) {
-                      setState(() {
-                        _listEstados;
-                      });
-
                       return;
                     }
                   },
