@@ -26,17 +26,23 @@ class PratoWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: ColorsApp.linearGradientDark,
           borderRadius: BorderRadius.circular(30),
+          boxShadow: const [
+            BoxShadow(
+              color: ColorsApp.darkSecondary,
+              blurRadius: 15,
+              offset: Offset(0, 12),
+            )
+          ],
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Container(
                 width: 180,
                 height: 180,
-                transform: Matrix4.translationValues(0, -20, 0),
+                transform: Matrix4.translationValues(0, -30, 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(90),
                   image: DecorationImage(

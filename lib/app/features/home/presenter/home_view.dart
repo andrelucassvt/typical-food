@@ -32,6 +32,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final heightCarousel = MediaQuery.of(context).size.height;
+
     return Scaffold(
       bottomNavigationBar: _listEstados.isEmpty
           ? null
@@ -76,19 +78,23 @@ class _HomeViewState extends State<HomeView> {
                     if (state is HomeListPratos) {
                       final prato = state.pratos;
 
-                      return CarouselSlider.builder(
-                        itemCount: state.pratos.length,
-                        options: CarouselOptions(
-                          aspectRatio: 1,
-                          viewportFraction: 0.7,
-                        ),
-                        itemBuilder: (context, index, _) => PratoWidget(
-                          url: prato[index].image,
-                          nome: prato[index].name,
-                          descricao: prato[index].description,
-                          onTap: () {
-                            log('tap !!');
-                          },
+                      return SizedBox(
+                        height: heightCarousel * 0.8,
+                        child: CarouselSlider.builder(
+                          itemCount: state.pratos.length,
+                          options: CarouselOptions(
+                            aspectRatio: 1,
+                            viewportFraction: 0.68,
+                            enlargeCenterPage: true,
+                          ),
+                          itemBuilder: (context, index, _) => PratoWidget(
+                            url: prato[index].image,
+                            nome: prato[index].name,
+                            descricao: prato[index].description,
+                            onTap: () {
+                              log('tap !!');
+                            },
+                          ),
                         ),
                       );
                     }
@@ -114,6 +120,7 @@ class _HomeViewState extends State<HomeView> {
         Icons.keyboard_arrow_down_outlined,
         color: Colors.white,
       ),
+      alignment: AlignmentDirectional.centerStart,
       items: _listEstados
           .map(
             (String estado) => DropdownMenuItem(
