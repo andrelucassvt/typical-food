@@ -52,64 +52,76 @@ class DetailsView extends StatelessWidget {
                     topRight: Radius.circular(40),
                   ),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Container(
-                          width: 200,
-                          height: 200,
-                          transform: Matrix4.translationValues(0, -100, 0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(99),
-                            image: DecorationImage(
-                              image: NetworkImage(prato.image),
-                              fit: BoxFit.cover,
-                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        transform: Matrix4.translationValues(0, -100, 0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(99),
+                          image: DecorationImage(
+                            image: NetworkImage(prato.image),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      Text(
-                        prato.name,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    ),
+                    Container(
+                      transform: Matrix4.translationValues(0, -35, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            prato.name,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              log('Click !!');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsApp.darkSecondary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 20,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Modelo 3D',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(Icons.view_in_ar)
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                      const SizedBox(height: 20),
-                      Text(
+                    ),
+                    SingleChildScrollView(
+                      child: Text(
                         prato.description,
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 15,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          log('Click !!');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorsApp.darkSecondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 80,
-                          ),
-                        ),
-                        child: const Text(
-                          'Modelo 3D',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
