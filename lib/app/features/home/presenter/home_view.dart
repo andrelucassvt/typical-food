@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:typical_food/app/common/global_widgets/circular_progress_widget.dart';
+import 'package:typical_food/app/features/details/presenter/details_view.dart';
 import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
@@ -92,7 +91,14 @@ class _HomeViewState extends State<HomeView> {
                             nome: prato[index].name,
                             descricao: prato[index].description,
                             onTap: () {
-                              log('tap !!');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsView(
+                                    prato: prato[index],
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ),
