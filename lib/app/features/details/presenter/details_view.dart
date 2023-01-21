@@ -16,14 +16,13 @@ class DetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final heightContainer = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 1,
-          backgroundColor: const Color(0x00FFFFFF),
-        ),
-        body: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Detalhes'),
+        backgroundColor: ColorsApp.darkSecondary,
+      ),
+      body: SafeArea(
+        child: Stack(
           fit: StackFit.expand,
           children: [
             Positioned(
