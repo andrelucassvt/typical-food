@@ -16,6 +16,8 @@ class BottomNavBarStatesWidget extends StatefulWidget {
 class _BottomNavBarStatesWidgetState extends State<BottomNavBarStatesWidget> {
   @override
   Widget build(BuildContext context) {
+    final widthContainer = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
@@ -23,7 +25,7 @@ class _BottomNavBarStatesWidgetState extends State<BottomNavBarStatesWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-              width: 150,
+              width: widthContainer * 0.4,
               height: 50,
               decoration: const BoxDecoration(
                 color: Colors.blue,
@@ -31,7 +33,7 @@ class _BottomNavBarStatesWidgetState extends State<BottomNavBarStatesWidget> {
               ),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: widget.item,
                 ),
               ),

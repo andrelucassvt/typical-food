@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:typical_food/app/common/global_widgets/circular_progress_widget.dart';
+import 'package:typical_food/app/features/details/presenter/details_view.dart';
 import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
@@ -32,6 +31,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final heightCarousel = MediaQuery.of(context).size.height;
+
     return Scaffold(
       bottomNavigationBar: _listEstados.isEmpty
           ? null
@@ -76,19 +77,30 @@ class _HomeViewState extends State<HomeView> {
                     if (state is HomeListPratos) {
                       final prato = state.pratos;
 
-                      return CarouselSlider.builder(
-                        itemCount: state.pratos.length,
-                        options: CarouselOptions(
-                          aspectRatio: 1,
-                          viewportFraction: 0.7,
-                        ),
-                        itemBuilder: (context, index, _) => PratoWidget(
-                          url: prato[index].image,
-                          nome: prato[index].name,
-                          descricao: prato[index].description,
-                          onTap: () {
-                            log('tap !!');
-                          },
+                      return SizedBox(
+                        height: heightCarousel * 0.8,
+                        child: CarouselSlider.builder(
+                          itemCount: state.pratos.length,
+                          options: CarouselOptions(
+                            aspectRatio: 1,
+                            viewportFraction: 0.68,
+                            enlargeCenterPage: true,
+                          ),
+                          itemBuilder: (context, index, _) => PratoWidget(
+                            url: prato[index].image,
+                            nome: prato[index].name,
+                            descricao: prato[index].description,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsView(
+                                    prato: prato[index],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       );
                     }
@@ -114,6 +126,7 @@ class _HomeViewState extends State<HomeView> {
         Icons.keyboard_arrow_down_outlined,
         color: Colors.white,
       ),
+      alignment: AlignmentDirectional.centerStart,
       items: _listEstados
           .map(
             (String estado) => DropdownMenuItem(
