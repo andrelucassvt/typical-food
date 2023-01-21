@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:typical_food/app/common/global_widgets/circular_progress_widget.dart';
+import 'package:typical_food/app/common/strings/colors_app.dart';
 import 'package:typical_food/app/features/details/presenter/details_view.dart';
 import 'package:typical_food/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/app_bar_adaptive.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/bottom_nav_bar_states_widget.dart';
 import 'package:typical_food/app/features/home/presenter/widgets/prato_widget.dart';
-import 'package:typical_food/app/common/strings/colors_app.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -54,10 +54,6 @@ class _HomeViewState extends State<HomeView> {
                         _listEstados = state.estados;
                       });
 
-                      return;
-                    }
-
-                    if (state is HomeSucess) {
                       return;
                     }
                   },
