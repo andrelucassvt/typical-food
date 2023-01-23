@@ -1,14 +1,12 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 
 class CircularProgressWidget extends StatelessWidget {
-  CircularProgressWidget({
+  const CircularProgressWidget({
     Key? key,
     required this.color,
   }) : super(key: key);
 
-  Color color;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
