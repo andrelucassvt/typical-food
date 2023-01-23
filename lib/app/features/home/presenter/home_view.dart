@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
                   },
                   builder: (context, state) {
                     if (state is HomeLoading) {
-                      return CircularProgressWidget(
+                      return const CircularProgressWidget(
                         color: ColorsApp.darkPrimary,
                       );
                     }
